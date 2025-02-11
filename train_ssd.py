@@ -33,7 +33,7 @@ from vision.ssd.data_preprocessing import TrainAugmentation, TestTransform
 from eval_ssd import MeanAPEvaluator
 
 
-DEFAULT_PRETRAINED_MODEL='models/mobilenet-v1-ssd-mp-0_675.pth'
+DEFAULT_PRETRAINED_MODEL='models/mobilenet-v2-ssd-mp-0_675.pth'
 
 
 parser = argparse.ArgumentParser(

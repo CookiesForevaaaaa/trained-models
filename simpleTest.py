@@ -36,7 +36,7 @@ parser.add_argument("input", type=str, default="", nargs='?', help="URI of the i
 parser.add_argument("output", type=str, default="", nargs='?', help="URI of the output stream")
 parser.add_argument("--network", type=str, default="ssd-mobilenet-v2", help="pre-trained model to load (see below for options)")
 parser.add_argument("--overlay", type=str, default="box,labels,conf", help="detection overlay flags (e.g. --overlay=box,labels,conf)\nvalid combinations are:  'box', 'labels', 'conf', 'none'")
-parser.add_argument("--threshold", type=float, default=0.5, help="minimum detection threshold to use") 
+parser.add_argument("--threshold", type=float, default=0.25, help="minimum detection threshold to use") 
 parser.add_argument("--input-codec", type=str, default="h264", help="codec of the input stream (e.g., h264, h265)")
 
 try:
@@ -47,7 +47,7 @@ except:
 	sys.exit(0)
 
 # create video sources and outputs
-input = videoSource("rtsp://192.168.1.18:1234", argv=sys.argv)
+input = videoSource("/dev/video2", argv=sys.argv)
 output = videoOutput(args.output, argv=sys.argv)
 	
 # load the object detection network
@@ -55,7 +55,7 @@ output = videoOutput(args.output, argv=sys.argv)
 
 # note: to hard-code the paths to load a model, the following API can be used:
 #
-net = detectNet(model="models/fruit/ssd-mobilenet.onnx", labels="model/labels.txt", 
+net = detectNet(model="models/eye/ssd-mobilenet.onnx", labels="models/eye/labels.txt", 
                 input_blob="input_0", output_cvg="scores", output_bbox="boxes", 
                 threshold=args.threshold)
 
